@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noiraé Home & Textile</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F7F7F2;
+            color: #2A2A2A;
+            line-height: 1.6;
+        }
+
+        /* Typography */
+        .serif-font {
+            font-family: 'EB Garamond', serif;
+        }
+
+        /* Header Styles */
+        .header {
+            background: #F7F7F2;
+            border-bottom: 1px solid #E8E8E0;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-family: 'EB Garamond', serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: #2A2A2A;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #2A2A2A;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: #8B7355;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .cart-counter {
+            background: #8B7355;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        /* Main Content */
+        .main-content {
+            min-height: calc(100vh - 80px);
+            padding: 40px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Homepage Styles */
+        .hero-section {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, #F7F7F2 0%, #F0F0EB 100%);
+        }
+
+        .hero-title {
+            font-family: 'EB Garamond', serif;
+            font-size: 48px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #2A2A2A;
+            letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: #6B6B6B;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            background: #2A2A2A;
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: #8B7355;
+            transform: translateY(-2px);
+        }
+
+        /* Product Grid */
+        .products-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-family: 'EB Garamond', serif;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .coming-soon-container {
+            text-align: center;
+            padding: 100px 20px;
+            background: white;
+            border: 1px solid #E8E8E0;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+
+        .coming-soon-icon {
+            font-size: 64px;
+            margin-bottom: 30px;
+            opacity: 0.7;
+        }
+
+        .coming-soon-title {
+            font-family: 'EB Garamond', serif;
+            font-size: 32px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #2A2A2A;
+            letter-spacing: 1px;
+        }
+
+        .coming-soon-description {
+            color: #6B6B6B;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .notify-button {
+            background: transparent;
+            border: 1px solid #2A2A2A;
+            padding: 15px 30px;
+            color: #2A2A2A;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .notify-button:hover {
+            background: #2A2A2A;
+            color: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #E8E8E0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #D4C4A8, #8B7355);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card:hover .product-image::before {
+            opacity: 1;
+        }
+
+        .product-details {
+            padding: 30px;
+        }
+
+        .product-name {
+            font-family: 'EB Garamond', serif;
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #2A2A2A;
+        }
+
+        .product-description {
+            color: #6B6B6B;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 500;
+            color: #2A2A2A;
+            margin-bottom: 20px;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            background: transparent;
+            border: 1px solid #2A2A2A;
+            padding: 12px;
+            color: #2A2A2A;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background: #2A2A2A;
+            color: white;
+        }
+
+        /* Login Page Styles */
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 60px 40px;
+            background: white;
+            border: 1px solid #E8E8E0;
+        }
+
+        .login-title {
+            font-family: 'EB Garamond', serif;
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #6B6B6B;
+            margin-bottom: 10px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #E8E8E0;
+            background: #F9F9F9;
+            font-size: 16px;
+            color: #2A2A2A;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #8B7355;
+            background: white;
+        }
+
+        .login-button {
+            width: 100%;
+            background: #2A2A2A;
+            color: white;
+            padding: 15px;
+            border: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .login-button:hover {
+            background: #8B7355;
+        }
+
+        .forgot-password {
+            text-align: center;
+            color: #6B6B6B;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            color: #8B7355;
+        }
+
+        /* Cart Page Styles */
+        .cart-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cart-title {
+            font-family: 'EB Garamond', serif;
+            font-size: 36px;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 30px 0;
+            border-bottom: 1px solid #E8E8E0;
+        }
+
+        .cart-item-image {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #D4C4A8, #8B7355);
+            margin-right: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-family: 'EB Garamond', serif;
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: #6B6B6B;
+            margin-bottom: 10px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .quantity-btn {
+            background: transparent;
+            border: 1px solid #E8E8E0;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quantity-btn:hover {
+            border-color: #8B7355;
+        }
+
+        .quantity {
+            font-weight: 500;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: #6B6B6B;
+            cursor: pointer;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-left: 30px;
+            transition: color 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            color: #d32f2f;
+        }
+
+        .cart-summary {
+            background: white;
+            border: 1px solid #E8E8E0;
+            padding: 40px;
+            margin-top: 40px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #E8E8E0;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: #2A2A2A;
+            color: white;
+            padding: 15px;
+            border: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background: #8B7355;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 100px 20px;
+            color: #6B6B6B;
+        }
+
+        .empty-cart-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .cart-item-image {
+                margin-bottom: 20px;
+                margin-right: 0;
+            }
+
+            .remove-btn {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+        }
+
+        /* About Page Styles */
+        .about-section {
+            padding: 80px 0;
+        }
+
+        .about-hero {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .about-title {
+            font-family: 'EB Garamond', serif;
+            font-size: 48px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            color: #2A2A2A;
+            letter-spacing: 2px;
+        }
+
+        .about-description {
+            font-size: 18px;
+            color: #6B6B6B;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .founders-section {
+            margin-top: 80px;
+        }
+
+        .founders-title {
+            font-family: 'EB Garamond', serif;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: #2A2A2A;
+        }
+
+        .founders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 60px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .founder-card {
+            background: white;
+            border: 1px solid #E8E8E0;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .founder-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .founder-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #D4C4A8, #8B7355);
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+        }
+
+        .founder-name {
+            font-family: 'EB Garamond', serif;
+            font-size: 28px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #2A2A2A;
+        }
+
+        .founder-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8B7355;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .founder-bio {
+            color: #6B6B6B;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .founders-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .founder-card {
+                padding: 30px 20px;
+            }
+
+            .about-title {
+                font-size: 36px;
+            }
+
+            .founders-title {
+                font-size: 28px;
+            }
+        }
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 50px 20px;
+                padding: 40px 20px;
+            }
+
+            .cart-summary {
+                padding: 20px;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: #2A2A2A;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 4px;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Main App Component
+        function App() {
+            const [currentPage, setCurrentPage] = useState('home');
+            const [cart, setCart] = useState([]);
+            const [notification, setNotification] = useState('');
+
+            // Show notification function
+            const showNotification = (message) => {
+                setNotification(message);
+                setTimeout(() => setNotification(''), 3000);
+            };
+
+            // Add to cart function - placeholder for backend integration
+            const addToCart = (product) => {
+                // TODO: Backend Integration - API call to add product to user's cart
+                // Example: await fetch('/api/cart/add', { method: 'POST', body: JSON.stringify(product) })
+                
+                const existingItem = cart.find(item => item.id === product.id);
+                if (existingItem) {
+                    setCart(cart.map(item => 
+                        item.id === product.id 
+                            ? { ...item, quantity: item.quantity + 1 }
+                            : item
+                    ));
+                } else {
+                    setCart([...cart, { ...product, quantity: 1 }]);
+                }
+                showNotification(`${product.name} added to cart`);
+            };
+
+            // Update cart quantity function - placeholder for backend integration
+            const updateQuantity = (productId, newQuantity) => {
+                // TODO: Backend Integration - API call to update cart item quantity
+                // Example: await fetch('/api/cart/update', { method: 'PUT', body: JSON.stringify({ productId, quantity: newQuantity }) })
+                
+                if (newQuantity === 0) {
+                    removeFromCart(productId);
+                } else {
+                    setCart(cart.map(item => 
+                        item.id === productId 
+                            ? { ...item, quantity: newQuantity }
+                            : item
+                    ));
+                }
+            };
+
+            // Remove from cart function - placeholder for backend integration
+            const removeFromCart = (productId) => {
+                // TODO: Backend Integration - API call to remove product from cart
+                // Example: await fetch('/api/cart/remove', { method: 'DELETE', body: JSON.stringify({ productId }) })
+                
+                setCart(cart.filter(item => item.id !== productId));
+                showNotification('Item removed from cart');
+            };
+
+            // Calculate cart total
+            const cartTotal = cart.reduce((total, item) => {
+                const price = parseInt(item.price.replace('$', ''));
+                return total + (price * item.quantity);
+            }, 0);
+
+            // Login function - placeholder for backend integration
+            const handleLogin = (email, password) => {
+                // TODO: Backend Integration - API call to authenticate user
+                // Example: const response = await fetch('/api/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) })
+                // if (response.ok) { 
+                //     const userData = await response.json();
+                //     setUser(userData);
+                //     setCurrentPage('home');
+                // }
+                
+                console.log('Login attempt:', { email, password });
+                showNotification('Login functionality - Backend integration required');
+                // For demo purposes, redirect to home
+                setTimeout(() => setCurrentPage('home'), 1500);
+            };
+
+            // Checkout function - placeholder for backend integration
+            const handleCheckout = () => {
+                // TODO: Backend Integration - API call to process checkout
+                // Example: await fetch('/api/checkout', { method: 'POST', body: JSON.stringify({ cart, total: cartTotal }) })
+                
+                console.log('Checkout attempt:', { cart, total: cartTotal });
+                showNotification('Checkout functionality - Backend integration required');
+            };
+
+            return (
+                <div className="App">
+                    <Header 
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                        cartCount={cart.reduce((total, item) => total + item.quantity, 0)}
+                    />
+                    
+                    <main className="main-content">
+                        {currentPage === 'home' && (
+                            <Homepage 
+                                setCurrentPage={setCurrentPage}
+                            />
+                        )}
+                        {currentPage === 'about' && (
+                            <AboutPage />
+                        )}
+                        {currentPage === 'login' && (
+                            <LoginPage onLogin={handleLogin} />
+                        )}
+                        {currentPage === 'cart' && (
+                            <CartPage 
+                                cart={cart}
+                                updateQuantity={updateQuantity}
+                                removeFromCart={removeFromCart}
+                                cartTotal={cartTotal}
+                                onCheckout={handleCheckout}
+                            />
+                        )}
+                    </main>
+
+                    {notification && (
+                        <div className="notification">
+                            {notification}
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        // Header Component
+        function Header({ currentPage, setCurrentPage, cartCount }) {
+            return (
+                <header className="header">
+                    <div className="nav-container">
+                        <a 
+                            href="#" 
+                            className="logo"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                setCurrentPage('home');
+                            }}
+                        >
+                            Noiraé
+                        </a>
+                        
+                        <nav>
+                            <ul className="nav-links">
+                                <li>
+                                    <a onClick={() => setCurrentPage('home')}>
+                                        New Arrivals
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onClick={() => setCurrentPage('home')}>
+                                        Bedding
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onClick={() => setCurrentPage('home')}>
+                                        Bath
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onClick={() => setCurrentPage('home')}>
+                                        Living
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onClick={() => setCurrentPage('about')}>
+                                        About
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onClick={() => setCurrentPage('home')}>
+                                        Contact
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <div className="nav-actions">
+                            <a 
+                                href="#"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setCurrentPage('login');
+                                }}
+                            >
+                                Account
+                            </a>
+                            <a 
+                                href="#"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setCurrentPage('cart');
+                                }}
+                                style={{ display: 'flex', alignItems: 'center' }}
+                            >
+                                Cart
+                                {cartCount > 0 && (
+                                    <span className="cart-counter">{cartCount}</span>
+                                )}
+                            </a>
+                        </div>
+                    </div>
+                </header>
+            );
+        }
+
+        // Homepage Component
+        function Homepage({ setCurrentPage }) {
+            return (
+                <div className="fade-in">
+                    <section className="hero-section">
+                        <div className="container">
+                            <h1 className="hero-title">Premium Home & Textile</h1>
+                            <p className="hero-subtitle">
+                                Discover our collection of carefully crafted home textiles and furnishings, 
+                                each designed to transform your living space with comfort, style, and elegance.
+                            </p>
+                            <button 
+                                className="cta-button"
+                                onClick={() => document.querySelector('.products-section').scrollIntoView({ behavior: 'smooth' })}
+                            >
+                                Explore Collection
+                            </button>
+                        </div>
+                    </section>
+
+                    <section className="products-section">
+                        <div className="container">
+                            <h2 className="section-title">Featured Home Textiles</h2>
+                            <div className="coming-soon-container">
+                                <div className="coming-soon-icon">🏠</div>
+                                <h3 className="coming-soon-title">Coming Soon</h3>
+                                <p className="coming-soon-description">
+                                    We're carefully curating an exceptional collection of home textiles and furnishings 
+                                    that will soon be available. Each piece is being selected with the 
+                                    finest materials and attention to detail you deserve for your home.
+                                </p>
+                                <button className="notify-button">
+                                    Notify Me When Available
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            );
+        }
+
+
+
+        // Login Page Component
+        function LoginPage({ onLogin }) {
+            const [email, setEmail] = useState('');
+            const [password, setPassword] = useState('');
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                onLogin(email, password);
+            };
+
+            return (
+                <div className="container fade-in">
+                    <div className="login-container">
+                        <h1 className="login-title">Sign In</h1>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label className="form-label">Email Address</label>
+                                <input 
+                                    type="email"
+                                    className="form-input"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">Password</label>
+                                <input 
+                                    type="password"
+                                    className="form-input"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                />
+                            </div>
+                            <button type="submit" className="login-button">
+                                Sign In
+                            </button>
+                        </form>
+                        <a href="#" className="forgot-password">
+                            Forgotten your password?
+                        </a>
+                    </div>
+                </div>
+            );
+        }
+
+        // Cart Page Component
+        function CartPage({ cart, updateQuantity, removeFromCart, cartTotal, onCheckout }) {
+            if (cart.length === 0) {
+                return (
+                    <div className="container fade-in">
+                        <div className="empty-cart">
+                            <div className="empty-cart-icon">🛒</div>
+                            <h2>Your cart is empty</h2>
+                            <p>Add some products to get started</p>
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="container fade-in">
+                    <div className="cart-container">
+                        <h1 className="cart-title">Shopping Cart</h1>
+                        
+                        {cart.map(item => (
+                            <CartItem 
+                                key={item.id}
+                                item={item}
+                                onUpdateQuantity={updateQuantity}
+                                onRemove={removeFromCart}
+                            />
+                        ))}
+
+                        <div className="cart-summary">
+                            <div className="cart-total">
+                                <span>Total:</span>
+                                <span>${cartTotal}</span>
+                            </div>
+                            <button className="checkout-btn" onClick={onCheckout}>
+                                Proceed to Checkout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Cart Item Component
+        function CartItem({ item, onUpdateQuantity, onRemove }) {
+            return (
+                <div className="cart-item">
+                    <div className="cart-item-image">
+                        {item.image}
+                    </div>
+                    <div className="cart-item-details">
+                        <h3 className="cart-item-name">{item.name}</h3>
+                        <div className="cart-item-price">{item.price}</div>
+                        <div className="quantity-controls">
+                            <button 
+                                className="quantity-btn"
+                                onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
+                            >
+                                −
+                            </button>
+                            <span className="quantity">{item.quantity}</span>
+                            <button 
+                                className="quantity-btn"
+                                onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
+                            >
+                                +
+                            </button>
+                        </div>
+                    </div>
+                    <button 
+                        className="remove-btn"
+                        onClick={() => onRemove(item.id)}
+                    >
+                        Remove
+                    </button>
+                </div>
+            );
+        }
+
+        // About Page Component
+        function AboutPage() {
+            return (
+                <div className="container fade-in">
+                    <section className="about-section">
+                        <div className="about-hero">
+                            <h1 className="about-title">About Noiraé</h1>
+                            <p className="about-description">
+                                Founded with a passion for exceptional home textiles, Noiraé represents the perfect 
+                                harmony between traditional craftsmanship and contemporary design. Our carefully curated 
+                                collection features unique pieces that transform spaces, create comfort, and complement 
+                                the natural rhythm of your daily life. Each textile is crafted with the finest 
+                                materials and an unwavering commitment to quality and artistry.
+                            </p>
+                        </div>
+
+                        <div className="founders-section">
+                            <h2 className="founders-title">Meet Our Founders</h2>
+                            <div className="founders-grid">
+                                <div className="founder-card">
+                                    <div className="founder-image">👩</div>
+                                    <h3 className="founder-name">Di Song</h3>
+                                    <p className="founder-title">Co-Founder & Design Director</p>
+                                    <p className="founder-bio">
+                                        With over 15 years of experience in luxury home textiles, Di brings 
+                                        her expertise from renowned textile houses across Europe and Asia. Her 
+                                        passion for natural fibers and innovative weaving techniques 
+                                        drives Noiraé's unique design identity. Di believes that 
+                                        home textiles are the foundation of personal comfort and style.
+                                    </p>
+                                </div>
+
+                                <div className="founder-card">
+                                    <div className="founder-image">👩</div>
+                                    <h3 className="founder-name">Pinpin Wen</h3>
+                                    <p className="founder-title">Co-Founder & Brand Director</p>
+                                    <p className="founder-bio">
+                                        Pinpin's background in luxury brand management and sustainable business 
+                                        practices shapes Noiraé's commitment to ethical sourcing and environmental 
+                                        responsibility. Her vision for creating meaningful connections between 
+                                        home textiles and lifestyle has positioned Noiraé as a thoughtful alternative 
+                                        in the luxury home furnishing market.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            );
+        }
+
+        // Render the app
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
